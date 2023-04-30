@@ -22,10 +22,22 @@ $(function () {
     timeBlock.each(function() {
       var timeblockHour = $("id").attr(this);
 
+      if (timeblockHour < hour) {
+        timeBlock.addClass("past");
+      } else if (timeblockHour === hour) {
+        timeBlock.removeClass("past");
+        timeBlock.addClass("present");  
+      } else {
+        timeBlock.removeClass("past");
+        timeBlock.removeClass("present");
+        timeBlock.addClass("future");
+      }
+
     })
 
   }
 
+  timeCheck();
 
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
