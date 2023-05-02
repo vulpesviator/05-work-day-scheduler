@@ -20,17 +20,14 @@ $(function () {
     var timeBlock = $('.time-block')
 
     timeBlock.each(function() {
-      var timeblockHour = $("id").attr(this);
+      var timeblockHour = parseInt($(this).attr("id").split("-")[1]);
 
       if (timeblockHour < hour) {
-        timeBlock.addClass("past");
+        $(this).removeClass("present future").addClass("past");
       } else if (timeblockHour === hour) {
-        timeBlock.removeClass("past");
-        timeBlock.addClass("present");  
+        $(this).removeClass("past future").addClass("present");
       } else {
-        timeBlock.removeClass("past");
-        timeBlock.removeClass("present");
-        timeBlock.addClass("future");
+        $(this).removeClass("past present").addClass("future");
       }
 
     })
