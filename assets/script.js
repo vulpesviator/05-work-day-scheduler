@@ -2,9 +2,23 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
-  
-  // getStorage();
 
+  for (var i = 9; i <= 17; i++) {
+    var hourId = "hour-" + i;
+    var idVal = localStorage.getItem('hour-' + i);
+    var hourText = (i < 12) ? i + "AM" : (i === 12) ? "NOON" : i - 12 + "PM";
+    
+    var row = $("<div>").attr("id", hourId).addClass("row time-block")
+    var hourVal = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(hourText);
+    var descriptionVal = $("<textarea>").addClass("col-8 col-md-10 description").attr("rows", 3);
+    var createSaveBtn = $("<button>").addClass("btn saveBtn col-2 col-md-1").attr("aria-label", "save");
+    var saveIcon = $("<i>").addClass("fas fa-save").attr("aria-hidden", "true");
+
+    row.append(hourVal, descriptionVal, createSaveBtn.append(saveIcon));
+    $(".container-lg").append(row);
+    
+    $(`#hour-${i} .description`).val(idVal);
+  }
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -59,10 +73,7 @@ $(function () {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
 
-  for (var i = 9; i <= 17; i++) {
-    var idVal = localStorage.getItem('hour-' + i);
-    $(`#hour-${i} .description`).val(idVal);
-  }
+  
 
   // TODO: Add code to display the current date in the header of the page.
   $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
