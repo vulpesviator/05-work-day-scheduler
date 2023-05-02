@@ -2,6 +2,8 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+  
+  getStorage();
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -13,11 +15,19 @@ $(function () {
 
   saveBtn.on("click", function(event) {
     event.preventDefault();
-    var id = $(this).attr("id");
+    var id = $(this).parent().attr("id");
     var description = $(this).siblings(".description").val();
    
     localStorage.setItem(id, description);
-  })
+  });
+
+  function getStorage(id) {
+    var idVal = localStorage.getItem(id)
+    if (true) {
+      var text = $(".description").val(idVal)
+      console.log(text);
+    }
+  };
 
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
@@ -45,6 +55,8 @@ $(function () {
   }
 
   timeCheck();
+
+  setInterval(timeCheck, 900000);
 
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
